@@ -1,4 +1,5 @@
 from DataStructures.Tree import rbt_node as rb
+
 def new_map ():
     rbt = {
         "root": None,
@@ -21,9 +22,6 @@ def flip_colors(node_rbt):
     flip_node_color(node_rbt["left"])
     flip_node_color(node_rbt["right"])
     return node_rbt
-
-
-from DataStructures.Tree import rbt_node as rb
 
 
 def default_compare(key, element):
@@ -53,8 +51,6 @@ def rotate_right(node_rbt):
    node["size"] = size(node["left"]) + size(node["right"]) + 1
    return node
    
-  
-   
 def size_tree(root):
    if root is None:
       return 0
@@ -66,4 +62,30 @@ def size(my_bst):
       return 0
    else:
       return size_tree(my_bst)
+
+def insert_node(root, key, value):
+   
+   if root is not None:
+      if key < root["key"]:
+         root["left"] = insert_node(root["left"], key, value)
+      elif key > root["key"]:
+         root["right"] = insert_node(root["right"], key, value)
+      else:
+         root["value"] = value
+      if rb.is_red(root["right"]) and not rb.is_red(root["left"]):
+         root = rotate_left(root)
+      if rb.is_red(root["left"]) and rb.is_red(root["left"]["left"]):
+         root = rotate_right(root)
+      if rb.is_red(root["left"]) and rb.is_red(root["right"]):
+         flip_colors(root)
+      
+      root["size"] = size(root["left"]) + size(root["right"]) +1
+      return root
+
+def put(my_rbt, key, value):
+   my_rbt["root"] = insert_node(my_rbt["root"], key, value)
+   rb.change_color(my_rbt["root"], 1)
+   return my_rbt
+
+
    
