@@ -9,7 +9,6 @@ def new_map ():
     }
     return rbt
 
-
 def flip_node_color(node_rbt):
     if node_rbt is None:
         return "El nodo es None"
@@ -24,7 +23,6 @@ def flip_colors(node_rbt):
     flip_node_color(node_rbt["left"])
     flip_node_color(node_rbt["right"])
     return node_rbt
-
 
 def default_compare(key, element):
     if key == rb.get_key(element):
@@ -106,10 +104,8 @@ def get(my_rbt, key):
             return None
         else:
             return rb.get_value(node)
-        
 
-
-def contains(my_rbt, key)
+def contains(my_rbt, key):
     if get(my_rbt, key) is None:
         return False
     else:
@@ -120,6 +116,7 @@ def is_empty(my_rbt):
         return True
     else:
         return False
+
 def key_set_tree(root, key_list):
     if root is not None:
         key_set_tree(root["left"], key_list)
