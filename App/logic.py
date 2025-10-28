@@ -22,7 +22,7 @@
  * Contribuciones
  *
  * Dario Correal
- """
+"""
 
 import os
 import csv
@@ -205,14 +205,14 @@ def min_key(analyzer):
     """
     Llave mas pequena
     """
-    return rbt.left_key(analyzer["dateIndex"])
+    return rbt.get_min(analyzer["dateIndex"])
 
 
 def max_key(analyzer):
     """
     Llave mas grande
     """
-    return rbt.right_key(analyzer["dateIndex"])
+    return rbt.get_max(analyzer["dateIndex"])
 
 
 def index_height_areas(analyzer):
@@ -250,8 +250,13 @@ def get_crimes_by_range_area(analyzer, initialArea, finalArea):
     """
     Retorna el numero de crimenes en un rango de areas
     """
+    
     # TODO Completar la consulta de crimenes por rango de areas
     totalcrimes = 0
+    singled = rbt.values(analyzer["areaIndex"], initialArea, finalArea)
+    for area in singled["elements"]:
+        totalcrimes += sl.size(area["lstcrimes"])
+        
     return totalcrimes
 
 def get_crimes_by_range(analyzer, initialDate, finalDate):
