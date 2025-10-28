@@ -139,3 +139,39 @@ def value_set(my_rbt):
     value_list = sl.new_list()
     return value_set_tree(my_rbt["root"], value_list)
 
+def get_min_node(root):
+    
+    pass
+def get_min(my_rbt):
+    
+    pass
+
+def get_max_node(root):
+    pass
+def get_max(my_rbt):
+    
+    pass
+
+def height_tree(root):
+    
+    pass
+
+def height(my_rbt):
+    
+    pass
+
+def keys_range():
+    
+    pass
+
+def keys(my_rbt):
+    
+    pass
+
+def values_range():
+    
+    pass
+
+def values():
+    
+    pass
