@@ -144,25 +144,49 @@ def value_set(my_rbt):
     return value_set_tree(my_rbt["root"], value_list)
 
 def get_min_node(root):
+    if root is None:
+        return None
+    else:
+        current = root
+        while current["left"] is not None:
+            current = current["left"]
+        return current["key"]
     
-    pass
-def get_min(my_rbt):
-    
-    pass
+def get_min(my_bst):
+    if my_bst["root"] is None:
+        return None
+    else:
+        return get_min_node(my_bst["root"])
 
 def get_max_node(root):
-    pass
-def get_max(my_rbt):
+    if root is None:
+        return None
+    else:
+        current = root
+        while current["right"] is not None:
+            current = current["right"]
+        return current["key"]
     
-    pass
+
+def get_max(my_bst):
+    if my_bst["root"] is None:
+        return None
+    else:
+        return get_max_node(my_bst["root"])
 
 def height_tree(root):
-    
-    pass
+    if root is None:
+        return 0 
+    else:
+        left_height = height_tree(root["left"])
+        right_height = height_tree(root["right"])
+        return 1 + max(left_height, right_height)
 
-def height(my_rbt):
-    
-    pass
+def height (my_bst):
+    if my_bst["root"] is None:
+        return 0
+    else:
+        return height_tree(my_bst["root"])
 
 def keys_range():
     
