@@ -1,7 +1,6 @@
 from DataStructures.Tree import rbt_node as rb
 from DataStructures.List import single_linked_list as sl
 
-
 def new_map ():
     rbt = {
         "root": None,
@@ -11,11 +10,11 @@ def new_map ():
 
 def flip_node_color(node_rbt):
     if node_rbt is None:
-        return "El nodo es None"
+        return None
     elif rb.is_red(node_rbt):
-        rb.change_color(node_rbt,"BLACK")
+        rb.change_color(node_rbt,1)
     else:
-        rb.change_color(node_rbt,"RED")
+        rb.change_color(node_rbt,0)
     return node_rbt
 
 def flip_colors(node_rbt):
@@ -23,9 +22,6 @@ def flip_colors(node_rbt):
     flip_node_color(node_rbt)
     left = flip_node_color(node_rbt["left"])
     right = flip_node_color(node_rbt["right"])
-    node_rbt["left"] = left
-    node_rbt["right"] = right
-    
     return node_rbt
 
 def default_compare(key, element):
@@ -62,10 +58,10 @@ def size_tree(root):
         return 1 + size_tree(root["left"]) + size_tree(root["right"])
 
 def size(my_bst):
-    if my_bst is None:
+    if my_bst["root"] is None:
         return 0
     else:
-        return size_tree(my_bst)
+        return size_tree(my_bst["root"])
 
 def insert_node(root, key, value):
     if root is not None:
@@ -134,7 +130,7 @@ def key_set(my_rbt):
 
 def value_set_tree(root, value_list):
     if root is not None:
-        value_set_tree(root["left"], value_list):
+        value_set_tree(root["left"], value_list)
         sl.add_last(value_list, root["value"])
         value_set_tree(root["right"], value_list)
     return value_list
@@ -151,7 +147,7 @@ def get_min_node(root):
         while current["left"] is not None:
             current = current["left"]
         return current["key"]
-    
+
 def get_min(my_bst):
     if my_bst["root"] is None:
         return None
@@ -166,7 +162,7 @@ def get_max_node(root):
         while current["right"] is not None:
             current = current["right"]
         return current["key"]
-    
+
 
 def get_max(my_bst):
     if my_bst["root"] is None:
