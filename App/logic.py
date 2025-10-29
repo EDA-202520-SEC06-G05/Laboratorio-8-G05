@@ -141,11 +141,12 @@ def add_date_index(datentry, crime):
     lst = datentry["lstcrimes"]
     al.add_last(lst, crime)
     offenseIndex = datentry["offenseIndex"]
-    offentry = lp.get(offenseIndex, crime["OFFENSE_CODE_GROUP"])
+    key =  crime["OFFENSE_CODE"]
+    offentry = lp.get(offenseIndex,key)
     if (offentry is None):
-        entry = new_offense_entry(crime["OFFENSE_CODE_GROUP"], crime)
+        entry = new_offense_entry(crime["OFFENSE_CODE"], crime)
         al.add_last(entry["lstoffenses"], crime)
-        lp.put(offenseIndex, crime["OFFENSE_CODE_GROUP"], entry)
+        lp.put(offenseIndex, crime["OFFENSE_CODE"], entry)
     else:
         entry = offentry
         al.add_last(entry["lstoffenses"], crime)
