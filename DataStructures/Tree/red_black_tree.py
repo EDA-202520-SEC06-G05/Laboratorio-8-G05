@@ -62,22 +62,36 @@ def size(my_bst):
         return 0
     else:
         return size_tree(my_bst["root"])
-
+    
 def insert_node(root, key, value):
-    if root is not None:
-        if key < root["key"]:
-            root["left"] = insert_node(root["left"], key, value)
-        elif key > root["key"]:
-            root["right"] = insert_node(root["right"], key, value)
-        else:
-            root["value"] = value
-        if rb.is_red(root["right"]) and not rb.is_red(root["left"]):
-            root = rotate_left(root)
-        if rb.is_red(root["left"]) and rb.is_red(root["left"]["left"]):
-            root = rotate_right(root)
-        if rb.is_red(root["left"]) and rb.is_red(root["right"]):
-            flip_colors(root)
-    root["size"] = size(root["left"]) + size(root["right"]) +1
+    if root is None:
+        root = rb.new_node(key, value, 1)
+        return root
+
+    if key < root["key"]:
+        root["left"] = insert_node(root["left"], key, value)
+    elif key > root["key"]:
+        root["right"] = insert_node(root["right"], key, value)
+    else:
+        root["value"] = value
+
+    if (root["right"] is not None and rb.is_red(root["right"])) and not (root["left"] is not None and rb.is_red(root["left"])):
+        root = rotate_left(root)
+
+    if (root["left"] is not None and rb.is_red(root["left"])) and (root["left"]["left"] is not None and rb.is_red(root["left"]["left"])):
+        root = rotate_right(root)
+
+    if (root["left"] is not None and rb.is_red(root["left"])) and (root["right"] is not None and rb.is_red(root["right"])):
+        flip_colors(root)
+
+    left_size = 0
+    right_size = 0
+    if root["left"] is not None:
+        left_size = root["left"]["size"]
+    if root["right"] is not None:
+        right_size = root["right"]["size"]
+    root["size"] = left_size + right_size + 1
+
     return root
 
 def put(my_rbt, key, value):
@@ -140,7 +154,7 @@ def value_set(my_rbt):
     return value_set_tree(my_rbt["root"], value_list)
 
 def get_min_node(root):
-    if root is None:
+    if root["left"] is None:
         return None
     else:
         current = root
@@ -155,7 +169,7 @@ def get_min(my_bst):
         return get_min_node(my_bst["root"])
 
 def get_max_node(root):
-    if root is None:
+    if root["right"] is None:
         return None
     else:
         current = root
@@ -184,18 +198,27 @@ def height (my_bst):
     else:
         return height_tree(my_bst["root"])
 
-def keys_range():
-    
-    pass
+def key_set(my_rbt):
+    lista= sl.new_list()
+    key_set_tree(my_rbt["root"], lista)
+    return lista
 
-def keys(my_rbt):
-    
-    pass
+def value_set(my_rbt):
+    lista= sl.new_list()
+    value_set_tree(my_rbt["root"], lista)
+    return lista
 
-def values_range():
-    
-    pass
+def key_set_tree(node, lista):
+    if node is None:
+        return
+    key_set_tree(node["left"], lista)
+    sl.add_last(lista, node["key"])
+    key_set_tree(node["right"], lista)
 
-def values():
-    
-    pass
+
+def value_set_tree(node, lista):
+    if node is None:
+        return
+    value_set_tree(node["left"], lista)
+    sl.add_last(lista, node["value"])
+    value_set_tree(node["right"],lista)

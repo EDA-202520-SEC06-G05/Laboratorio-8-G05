@@ -82,11 +82,11 @@ def put(my_map, key, value):
 
 def default_compare(key, element):
 
-   if (key == me.get_key(element)):
-      return 0
-   elif (key > me.get_key(element)):
-      return 1
-   return -1
+    if (key == me.get_key(element)):
+        return 0
+    elif (key > me.get_key(element)):
+        return 1
+    return -1
 
 
 def contains(my_map, key):
@@ -126,7 +126,7 @@ def key_set(my_map):
     return lista
 
 def value_set(my_map):
-    lista = ar.new_list()
+    lista = al.new_list()
     for slot in my_map["table"]["elements"]:
         node = slot["first"]
         while node is not None:
